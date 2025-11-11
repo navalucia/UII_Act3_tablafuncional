@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'inicio_gym' %}">
+            <i class="fas fa-dumbbell me-2"></i>Sistema de Administración Gym
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'inicio_gym' %}">
+                        <i class="fas fa-home me-1"></i>Inicio
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="miembroDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-users me-1"></i>Miembro
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="miembroDropdown">
+                        <li><a class="dropdown-item" href="{% url 'agregar_miembro' %}">Agregar Miembro</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_miembros' %}">Ver Miembros</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="claseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-chalkboard-teacher me-1"></i>Clase
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="claseDropdown">
+                        <li><a class="dropdown-item" href="{% url 'agregar_clase' %}">Agregar Clase</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_clases' %}">Ver Clases</a></li> {# <-- ¡Este es el enlace para ver la tabla! #}
+                        <!-- Actualizar y Borrar se manejan desde la tabla de ver clases -->
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="empleadoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-tie me-1"></i>Empleado
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="empleadoDropdown">
+                        <li><a class="dropdown-item" href="#">Agregar Empleado (Adorno)</a></li>
+                        <li><a class="dropdown-item" href="#">Ver Empleados (Adorno)</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Empleado (Adorno)</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Empleado (Adorno)</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

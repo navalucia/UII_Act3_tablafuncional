@@ -1,0 +1,65 @@
+<!-- --- START OF FILE miembros/agregar_miembros.html (MODIFICADO) --- -->
+{% extends 'app_gym/base.html' %}
+
+{% block title %}Agregar Miembro{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-lg p-3 mb-5 bg-body rounded">
+            <div class="card-header bg-dark text-white text-center">
+                <h3>Agregar Nuevo Miembro</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="membresia_activa" name="membresia_activa" checked>
+                        <label class="form-check-label" for="membresia_activa">Membresía Activa</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen de Perfil</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                    </div>
+                    {# NUEVO CAMPO: Selector de Clase #}
+                    <div class="mb-3">
+                        <label for="clase_inscrita" class="form-label">Clase Inscrita</label>
+                        <select class="form-select" id="clase_inscrita" name="clase_inscrita">
+                            <option value="">-- Seleccionar Clase (Opcional) --</option>
+                            {% for clase in clases_disponibles %}
+                                <option value="{{ clase.pk }}">{{ clase.nombre_clase }} ({{ clase.horario }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {# FIN NUEVO CAMPO #}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Agregar Miembro</button>
+                        <a href="{% url 'ver_miembros' %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- --- END OF FILE miembros/agregar_miembros.html (MODIFICADO) --- -->

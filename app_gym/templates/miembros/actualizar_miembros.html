@@ -1,0 +1,75 @@
+<!-- --- START OF FILE miembros/actualizar_miembros.html (MODIFICADO) --- -->
+{% extends 'app_gym/base.html' %}
+{% load static %}
+
+{% block title %}Actualizar Miembro{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-lg p-3 mb-5 bg-body rounded">
+            <div class="card-header bg-dark text-white text-center">
+                <h3>Actualizar Miembro: {{ miembro.nombre }} {{ miembro.apellido }}</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ miembro.nombre }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" value="{{ miembro.apellido }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ miembro.fecha_nacimiento|date:'Y-m-d' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ miembro.email }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ miembro.telefono|default_if_none:'' }}">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="membresia_activa" name="membresia_activa" {% if miembro.membresia_activa %}checked{% endif %}>
+                        <label class="form-check-label" for="membresia_activa">Membresía Activa</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen de Perfil</label>
+                        {% if miembro.imagen %}
+                            <p>Imagen actual: <img src="{{ miembro.imagen.url }}" alt="{{ miembro.nombre }}" class="img-thumbnail"></p>
+                            <div class="form-check mb-2">
+                                <input type="checkbox" class="form-check-input" id="borrar_imagen" name="borrar_imagen">
+                                <label class="form-check-label" for="borrar_imagen">Borrar imagen actual</label>
+                            </div>
+                        {% endif %}
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                    </div>
+                    {# NUEVO CAMPO: Selector de Clase #}
+                    <div class="mb-3">
+                        <label for="clase_inscrita" class="form-label">Clase Inscrita</label>
+                        <select class="form-select" id="clase_inscrita" name="clase_inscrita">
+                            <option value="">-- Sin Clase --</option> {# Opción para no tener clase asignada #}
+                            {% for clase in clases_disponibles %}
+                                <option value="{{ clase.pk }}" {% if miembro.clase_inscrita == clase %}selected{% endif %}>
+                                    {{ clase.nombre_clase }} ({{ clase.horario }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {# FIN NUEVO CAMPO #}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <a href="{% url 'ver_miembros' %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- --- END OF FILE miembros/actualizar_miembros.html (MODIFICADO) --- -->
